@@ -7,6 +7,7 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { HeaderModule } from '@shared/components/header/header.module';
+import { PrimeNgModule } from './primeng/primeng.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -16,7 +17,8 @@ import { HeaderModule } from '@shared/components/header/header.module';
     BrowserModule,
     GraphQLModule,
     HttpClientModule,
-    HeaderModule
+    HeaderModule,
+    PrimeNgModule
   ],
   providers: [],
   bootstrap: [AppComponent]
