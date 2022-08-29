@@ -29,10 +29,10 @@ const QUERY = gql`
 })
 export class DataService {
   private _episodeSubject = new BehaviorSubject<Episode[] | null>(null);
-  episodes$ = this._episodeSubject.asObservable();
+  public episodes$ = this._episodeSubject.asObservable();
 
   private _charactersSubject = new BehaviorSubject<Character[] | null>(null);
-  characters$ = this._charactersSubject.asObservable();
+  public characters$ = this._charactersSubject.asObservable();
 
   constructor(private _apollo: Apollo) {
     this.getDataApi();
