@@ -27,8 +27,9 @@ export class HeaderComponent implements OnInit {
   }
 
   toogleTheme(): void {
-    this.items[3].icon == 'pi pi-fw pi-moon'
-      ? (this.items[3].icon = 'pi pi-fw pi-sun')
-      : (this.items[3].icon = 'pi pi-fw pi-moon');
+    let indexLastItem : number = this.items.length-1;
+    this.items[indexLastItem].icon == 'pi pi-fw pi-moon'
+      ? (this.items[indexLastItem].icon = 'pi pi-fw pi-sun')
+      : (this.items[indexLastItem].icon = 'pi pi-fw pi-moon');
   }
 }
