@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemeService } from '@app/shared/services/theme.service';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -8,7 +9,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class HeaderComponent implements OnInit {
   items: MenuItem[] = [];
-  constructor() {}
+  constructor(private _themeService: ThemeService) {}
 
   ngOnInit(): void {
     this.items = [
@@ -21,15 +22,21 @@ export class HeaderComponent implements OnInit {
       {
         label: 'Theme',
         icon: 'pi pi-fw pi-moon',
-        command: () => this.toogleTheme(),
+        command: () => this.swtichTheme(),
       },
     ];
   }
 
-  toogleTheme(): void {
-    let indexLastItem : number = this.items.length-1;
+  swtichTheme(): void {
+    let indexLastItem: number = this.items.length - 1;
     this.items[indexLastItem].icon == 'pi pi-fw pi-moon'
-      ? (this.items[indexLastItem].icon = 'pi pi-fw pi-sun')
-      : (this.items[indexLastItem].icon = 'pi pi-fw pi-moon');
+      ? (
+        this.items[indexLastItem].icon = 'pi pi-fw pi-sun',
+        this._themeService.swtichTheme('lightDeepPurple')
+        )
+      : (
+        this.items[indexLastItem].icon = 'pi pi-fw pi-moon',
+        this._themeService.swtichTheme('darkDeepPurple')
+        );
   }
 }

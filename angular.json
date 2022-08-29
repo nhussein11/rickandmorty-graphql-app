@@ -28,8 +28,16 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/primeng/resources/themes/mdc-dark-deeppurple/theme.css",
-              // "node_modules/primeng/resources/themes/mdc-light-deeppurple/theme.css",
+              {
+                "input": "node_modules/primeng/resources/themes/mdc-dark-deeppurple/theme.css",
+                "bundleName": "darkDeepPurple",
+                "inject": false
+              },
+              {
+                "input": "node_modules/primeng/resources/themes/mdc-light-deeppurple/theme.css",
+                "bundleName": "lightDeepPurple",
+                "inject": false
+              },
               "node_modules/primeflex/primeflex.css",
               "node_modules/primeicons/primeicons.css"
             ],
