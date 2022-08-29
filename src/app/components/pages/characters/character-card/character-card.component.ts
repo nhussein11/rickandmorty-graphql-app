@@ -5,9 +5,12 @@ import { Character } from '@app/shared/models/data.interface';
   selector: 'app-character-card',
   templateUrl: './character-card.component.html',
   styleUrls: ['./character-card.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharacterCardComponent {
   @Input() character: Character = {} as Character;
 
+  toggleFavorite(): void {
+    
+  }
 }

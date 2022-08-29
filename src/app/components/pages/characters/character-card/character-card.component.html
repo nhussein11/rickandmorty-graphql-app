@@ -1,8 +1,23 @@
 <article>
-  <figure>
-    <img src="{{character.image}}" alt="{{character.name}}" />
-  </figure>
+  <a [routerLink]="['character-details']">
+    <figure>
+      <img
+        rel="preload"
+        as="image"
+        src="{{ character.image }}"
+        alt="{{ character.name }}"
+      />
+    </figure>
+  </a>
   <div>
+    <figure>
+      <img
+        (click)="toggleFavorite()"
+        rel="preload"
+        as="image"
+
+      />
+    </figure>
     <h3>{{ character.name }}</h3>
     <ul>
       <li><label>Status: </label> {{ character.status }}</li>
