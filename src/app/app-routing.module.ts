@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '**', redirectTo: 'character-list', pathMatch: 'full' },
+  { path: '', redirectTo: 'character-list', pathMatch: 'full' },
   {
     path: 'home',
     loadChildren: () =>
@@ -37,9 +37,9 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'not-found',
+    path: '**',
     loadChildren: () =>
-      import('./components/pages/not-found/not-found/not-found.module').then(
+      import('./components/pages/not-found/not-found.module').then(
         (m) => m.NotFoundModule
       ),
   },
