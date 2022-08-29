@@ -6,15 +6,17 @@ import { AppComponent } from './app.component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 
+import { HeaderModule } from '@shared/components/header/header.module';
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     GraphQLModule,
-    HttpClientModule
+    HttpClientModule,
+    HeaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
