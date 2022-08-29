@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { BehaviorSubject, take, tap } from 'rxjs';
+import { Character, DataResponse, Episode } from '../models/data.interface';
 
 const QUERY = gql`
   {
@@ -27,26 +28,29 @@ const QUERY = gql`
   providedIn: 'root',
 })
 export class DataService {
-  private _episodeSubject = new BehaviorSubject(null);
+  private _episodeSubject = new BehaviorSubject<Episode[] | null>(null);
   episodes$ = this._episodeSubject.asObservable();
 
-  private _charactersSubject = new BehaviorSubject(null);
+  private _charactersSubject = new BehaviorSubject<Character[] | null>(null);
   characters$ = this._charactersSubject.asObservable();
 
-  constructor(private _apollo:Apollo) {
+  constructor(private _apollo: Apollo) {
     this.getDataApi();
   }
 
   private getDataApi(): void {
-    this._apollo.watchQuery<any>({
-      query:QUERY
-    }).valueChanges.pipe(
-      take(1),
-      tap(({data}) => {
-        const {characters, episodes } = data;
-        this._episodeSubject.next(episodes.results);
-        this._charactersSubject.next(characters.results);
+    this._apollo
+      .watchQuery<DataResponse>({
+        query: QUERY,
       })
-    ).subscribe();
+      .valueChanges.pipe(
+        take(1),
+        tap(({ data }) => {
+          const { characters, episodes } = data;
+          this._charactersSubject.next(characters.results);
+          this._episodeSubject.next(episodes.results);
+        })
+      )
+      .subscribe();
   }
 }
