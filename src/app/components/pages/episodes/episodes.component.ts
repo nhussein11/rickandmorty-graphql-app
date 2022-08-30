@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import { DataService } from '@app/shared/services/data.service';
+import { EpisodesService } from '@app/shared/services/episodes.service';
 
 @Component({
   selector: 'app-episodes',
   templateUrl: './episodes.component.html',
-  styleUrls: ['./episodes.component.css']
+  styleUrls: ['./episodes.component.css'],
 })
 export class EpisodesComponent {
-  episodes$ = this._dataService.episodes$;
-  constructor(private _dataService:DataService) { }
-
+  episodes$ = this._episodesService.episodes$;
+  constructor(private _episodesService: EpisodesService) {}
 }

@@ -1,5 +1,9 @@
-<article>
-  <a [routerLink]="['character-details']">
+<p-card
+  header="{{ character.name }}"
+  [style]="{ width: '360px', margin: '2rem', padding: '1rem' }"
+  styleClass="p-card-shadow"
+>
+  <ng-template pTemplate="header">
     <figure>
       <img
         rel="preload"
@@ -8,21 +12,20 @@
         alt="{{ character.name }}"
       />
     </figure>
-  </a>
+  </ng-template>
   <div>
-    <figure>
-      <img
-        (click)="toggleFavorite()"
-        rel="preload"
-        as="image"
-
-      />
-    </figure>
-    <h3>{{ character.name }}</h3>
     <ul>
       <li><label>Status: </label> {{ character.status }}</li>
       <li><label>Species: </label> {{ character.species }}</li>
       <li><label>Gender: </label> {{ character.gender }}</li>
     </ul>
   </div>
-</article>
+  <ng-template pTemplate="footer">
+    <p-button
+      [routerLink]="['character-details']"
+      label="Details"
+      icon="pi pi-info-circle"
+      
+    ></p-button>
+  </ng-template>
+</p-card>
