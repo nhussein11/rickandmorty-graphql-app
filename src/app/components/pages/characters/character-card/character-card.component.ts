@@ -9,8 +9,12 @@ import { Character } from '@app/shared/models/data.interface';
 })
 export class CharacterCardComponent {
   @Input() character: Character = {} as Character;
+  display: boolean = false;
 
-  toggleFavorite(): void {
-    
+  openDialog(): void {
+    this.display=true;
+  }
+  dialogClosed(display:boolean):void{
+    this.display=false;
   }
 }

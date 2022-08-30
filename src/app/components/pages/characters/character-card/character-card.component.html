@@ -22,9 +22,11 @@
   </div>
   <ng-template pTemplate="footer">
     <p-button
-      [routerLink]="['/character-details', character.id]"
       label="Details"
       icon="pi pi-info-circle"
+      (onClick)="openDialog()"
     ></p-button>
   </ng-template>
 </p-card>
+
+<app-character-details (dialogClosed)="dialogClosed($event)" [character]="character" [display]="display"></app-character-details>

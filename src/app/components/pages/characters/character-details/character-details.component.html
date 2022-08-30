@@ -1,1 +1,5 @@
-<p>character-details works!</p>
+
+<p-dialog header="Title" [(visible)]="display" (onHide)="closeDialog()">
+    Content
+    {{character|json}}
+</p-dialog>
