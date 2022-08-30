@@ -1,7 +1,7 @@
 <p-card
   header="{{ character.name }}"
-  [style]="{ width: '360px', margin: '2rem', padding: '1rem' }"
-  styleClass="p-card-shadow"
+  [style]="{ width: '300px', margin: '0.7rem', padding: '1rem' }"
+  styleClass="card-container inline-block "
 >
   <ng-template pTemplate="header">
     <figure>
@@ -22,10 +22,9 @@
   </div>
   <ng-template pTemplate="footer">
     <p-button
-      [routerLink]="['character-details']"
+      [routerLink]="['/character-details', character.id]"
       label="Details"
       icon="pi pi-info-circle"
-      
     ></p-button>
   </ng-template>
 </p-card>
