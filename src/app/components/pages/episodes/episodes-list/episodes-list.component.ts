@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Episode, EpisodeDetails } from '@app/shared/models/data.interface';
+import { Episode } from '@app/shared/models/data.interface';
 import { EpisodesService } from '@app/shared/services/episodes.service';
 import { Observable } from 'rxjs';
 
@@ -17,6 +17,7 @@ export class EpisodesListComponent {
   }
 
   openEpisodeDetails(name: string): void {
+
     this.displayEpisodeDetails = true;
     this.selectedEpisodeName = name;
   }

@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { EpisodeDetails } from '../models/data.interface';
-// filter: { name: "Pilot" }
+
 const QUERY = gql`
   query ($name: String) {
     episodes(filter: { name: $name }) {
@@ -23,6 +23,7 @@ const QUERY = gql`
 })
 export class EpisodeDetailsService {
   private _episode = new BehaviorSubject<EpisodeDetails>({} as EpisodeDetails);
+  private _nameToFilter: string = '';
 
   get episodeDetails(): any {
     return this._episode.asObservable();
@@ -30,21 +31,27 @@ export class EpisodeDetailsService {
   set EpisodeDetailsData(episode: EpisodeDetails) {
     this._episode.next(episode);
   }
-  constructor(private _apollo: Apollo) {}
+  set name(nameToFilter: string) {
+    this._nameToFilter = nameToFilter;
+  }
+  constructor(private _apollo: Apollo) {
+    this.getEpisodeDetailsData();
+  }
 
-  public getEpisodeDetailsData(name: string): void {
+  private getEpisodeDetailsData(): void {
     this._apollo
       .watchQuery({
         query: QUERY,
         variables: {
-          name: name,
+          name: this._nameToFilter,
         },
       })
       .valueChanges.pipe(
         tap(({ data }: any) => {
           this._episode = data.episodes.results;
           console.log(data.episodes.results);
-          // console.log(QUERY)
+          console.log(this._nameToFilter)
+          
         })
       )
       .subscribe();

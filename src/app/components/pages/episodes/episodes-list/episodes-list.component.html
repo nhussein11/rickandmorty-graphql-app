@@ -20,8 +20,10 @@
     </div>
   </div>
 </div>
-<app-episodes-details
-  [display]="displayEpisodeDetails"
-  [nameToFilter]="selectedEpisodeName"
-  (closeEpisodeDetails)="episodeDetailsClosed($event)"
-></app-episodes-details>
+<ng-template ngIf="displayEpisodeDetails">
+  <app-episodes-details
+    [display]="displayEpisodeDetails"
+    [nameToFilter]="selectedEpisodeName"
+    (closeEpisodeDetails)="episodeDetailsClosed($event)"
+  ></app-episodes-details>
+</ng-template>

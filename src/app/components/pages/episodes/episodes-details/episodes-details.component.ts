@@ -14,13 +14,11 @@ export class EpisodesDetailsComponent {
   @Output() closeEpisodeDetails: EventEmitter<boolean> =
     new EventEmitter<boolean>();
 
-  episodeDetails$: Observable<EpisodeDetails>;
+  episodeDetails$!: Observable<EpisodeDetails>;
 
   constructor(private _episodeDetailsService: EpisodeDetailsService) {
-    this._episodeDetailsService.getEpisodeDetailsData(this.nameToFilter);
+    this._episodeDetailsService.name = this.nameToFilter;
     this.episodeDetails$ = this._episodeDetailsService.episodeDetails;
-    console.log(this.episodeDetails$)
-    
   }
 
   closeDialog(): void {
