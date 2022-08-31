@@ -1,8 +1,23 @@
-<!-- <section>
-  <ul>
-    <li *ngFor="let episode of episodes$ | async">
-            {{ episode.episode }} - {{episode.name}}
-        </li>
-  </ul>
-</section> -->
-<p-listbox [options]="(episodes$ | async)!" optionLabel="name"></p-listbox>
+<div class="card my-5">
+  <div class="flex justify-content-center">
+    <div class="flex align-items-center justify-content-center">
+      <p-listbox
+        [options]="(episodes$ | async)!"
+        [metaKeySelection]="false"
+        [checkbox]="true"
+        [filter]="true"
+        [multiple]="true"
+        optionLabel="name"
+        [listStyle]="{ 'max-height': '450px;' }"
+        [style]="{ width: '35rem' }"
+      >
+        <ng-template let-episode pTemplate="item">
+          <div class="flex">
+            <div>{{ episode.episode }}</div>
+            <div>- {{ episode.name }}</div>
+          </div>
+        </ng-template>
+      </p-listbox>
+    </div>
+  </div>
+</div>
