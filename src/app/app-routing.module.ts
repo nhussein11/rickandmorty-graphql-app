@@ -11,9 +11,9 @@ const routes: Routes = [
   {
     path: 'episodes',
     loadChildren: () =>
-      import('./components/pages/episodes/episodes.module').then(
-        (m) => m.EpisodesModule
-      ),
+      import(
+        './components/pages/episodes/episodes-list/episodes-list.module'
+      ).then((m) => m.EpisodesListModule),
   },
   {
     path: 'character-list',

@@ -7,6 +7,7 @@ const QUERY = gql`
   {
     episodes {
       results {
+        id
         name
         episode
       }

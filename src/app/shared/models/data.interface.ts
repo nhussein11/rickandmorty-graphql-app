@@ -9,8 +9,14 @@ export interface APIResponse<T> {
 }
 
 export interface Episode {
+  id: string;
   name: string;
   episode: string;
+}
+
+export interface EpisodeDetails extends Episode {
+  air_date:string;
+  characters: Character[];
 }
 
 export interface Character {

@@ -6,13 +6,12 @@
         [metaKeySelection]="false"
         [checkbox]="true"
         [filter]="true"
-        [multiple]="true"
         optionLabel="name"
         [listStyle]="{ 'max-height': '450px;' }"
-        [style]="{ width: '35rem' }"
+        [style]="{ width: '20rem' }"
       >
         <ng-template let-episode pTemplate="item">
-          <div class="flex">
+          <div class="flex" (click)="openEpisodeDetails(episode.name)">
             <div>{{ episode.episode }}</div>
             <div>- {{ episode.name }}</div>
           </div>
@@ -21,3 +20,8 @@
     </div>
   </div>
 </div>
+<app-episodes-details
+  [display]="displayEpisodeDetails"
+  [nameToFilter]="selectedEpisodeName"
+  (closeEpisodeDetails)="episodeDetailsClosed($event)"
+></app-episodes-details>
