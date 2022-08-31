@@ -1,7 +1,8 @@
-<section>
-    <ul>
-        <li *ngFor="let episode of episodes$ | async">
+<!-- <section>
+  <ul>
+    <li *ngFor="let episode of episodes$ | async">
             {{ episode.episode }} - {{episode.name}}
         </li>
-    </ul>
-</section>
+  </ul>
+</section> -->
+<p-listbox [options]="(episodes$ | async)!" optionLabel="name"></p-listbox>

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Episode } from '@app/shared/models/data.interface';
 import { EpisodesService } from '@app/shared/services/episodes.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-episodes',
@@ -7,6 +9,9 @@ import { EpisodesService } from '@app/shared/services/episodes.service';
   styleUrls: ['./episodes.component.css'],
 })
 export class EpisodesComponent {
-  episodes$ = this._episodesService.episodes$;
-  constructor(private _episodesService: EpisodesService) {}
+  episodes$: Observable<Episode[]>;
+  
+  constructor(private _episodesService: EpisodesService) {
+    this.episodes$ = this._episodesService.episodes;
+  }
 }

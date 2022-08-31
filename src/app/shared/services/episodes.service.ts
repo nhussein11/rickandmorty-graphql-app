@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { BehaviorSubject, take, tap } from 'rxjs';
-import { DataResponse, Episode } from '../models/data.interface';
+import { BehaviorSubject, tap } from 'rxjs';
+import { Episode, EpisodesResponse } from '../models/data.interface';
 
 const QUERY = gql`
   {
@@ -18,25 +18,28 @@ const QUERY = gql`
   providedIn: 'root',
 })
 export class EpisodesService {
-  private _episodeSubject = new BehaviorSubject<Episode[] | null>(null);
-  public episodes$ = this._episodeSubject.asObservable();
+  private _episodesSubject = new BehaviorSubject<Episode[]>([]);
 
+  get episodes() {
+    return this._episodesSubject.asObservable();
+  }
 
+  set episodesData(episodes: Episode[]) {
+    this._episodesSubject.next(episodes);
+  }
 
   constructor(private _apollo: Apollo) {
     this.getDataApi();
   }
 
-  private getDataApi(): void {
+  private getDataApi() {
     this._apollo
-      .watchQuery<DataResponse>({
+      .watchQuery<EpisodesResponse>({
         query: QUERY,
       })
       .valueChanges.pipe(
-        take(1),
-        tap((resp) => {
-          const { episodes } = resp.data;
-          this._episodeSubject.next(episodes.results);
+        tap(({ data }) => {
+          this.episodesData = data.episodes.results;
         })
       )
       .subscribe();

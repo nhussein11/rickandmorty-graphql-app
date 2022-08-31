@@ -1,8 +1,9 @@
-export interface DataResponse {
-    characters: APIResponse<Character[]>;
-    episodes: APIResponse<Episode[]>;
+export interface EpisodesResponse {
+  episodes: APIResponse<Episode[]>;
 }
-
+export interface CharactersResponse {
+  characters: APIResponse<Character[]>;
+}
 export interface APIResponse<T> {
   results: T;
 }

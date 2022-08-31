@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Character } from '@app/shared/models/data.interface';
 import { CharactersService } from '@app/shared/services/characters.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-character-list',
@@ -7,7 +9,9 @@ import { CharactersService } from '@app/shared/services/characters.service';
   styleUrls: ['./character-list.component.css']
 })
 export class CharacterListComponent {
-  characters$ = this._charactersSerivce.characters$;
-  constructor(private _charactersSerivce:CharactersService) { }
+  characters$: Observable<Character[]>;
+  constructor(private _charactersSerivce:CharactersService) {
+    this.characters$ = this._charactersSerivce.characters;
+   }
 
 }
