@@ -12,8 +12,7 @@
       >
         <ng-template let-episode pTemplate="item">
           <div class="flex" (click)="openEpisodeDetails(episode.name)">
-            <div>{{ episode.episode }}</div>
-            <div>- {{ episode.name }}</div>
+            <div>{{ episode.episode }} - {{ episode.name }}</div>
           </div>
         </ng-template>
       </p-listbox>
