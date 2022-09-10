@@ -20,7 +20,4 @@ export class EpisodesListComponent {
     this.displayEpisodeDetails = true;
     this.selectedEpisodeName = name;
   }
-  episodeDetailsClosed(display: boolean): void {
-    this.displayEpisodeDetails = false;
-  }
 }

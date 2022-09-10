@@ -30,6 +30,7 @@ export class EpisodesDetailsComponent implements OnChanges {
 
   ngOnChanges(): void {
     // this.episodeDetails$ = this._episodesService.episodes;
+    
   }
 
   closeDialog(): void {

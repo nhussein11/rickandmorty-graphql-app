@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from '@apollo/client';
 import { Apollo, gql, TypedDocumentNode } from 'apollo-angular';
-import { map, of } from 'rxjs';
-import { Episode } from '../models/data.interface';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +8,7 @@ import { Episode } from '../models/data.interface';
 export class EpisodesService {
   constructor(private _apollo: Apollo) {}
 
-  public getDataApi(query?: TypedDocumentNode) {
+  public getDataApi(query?: TypedDocumentNode, filter?: object) {
     const QUERY = query
       ? query
       : gql`
@@ -29,18 +27,17 @@ export class EpisodesService {
           }
         `;
 
+    const FILTER = filter ? filter : {};
+
     return this._apollo
       .watchQuery({
         query: QUERY,
-        variables: {
-          name,
-        },
+        variables: FILTER,
       })
       .valueChanges.pipe(
         map(({ data }: any) => {
-          return data.episodes.results
+          return data.episodes.results;
         })
-      )
-
+      );
   }
 }
