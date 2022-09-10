@@ -1,48 +1,46 @@
 import { Injectable } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
-import { BehaviorSubject, tap } from 'rxjs';
-import { Episode, EpisodesResponse } from '../models/data.interface';
-
-const QUERY = gql`
-  {
-    episodes {
-      results {
-        id
-        name
-        episode
-      }
-    }
-  }
-`;
+import { Observable } from '@apollo/client';
+import { Apollo, gql, TypedDocumentNode } from 'apollo-angular';
+import { map, of } from 'rxjs';
+import { Episode } from '../models/data.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EpisodesService {
-  private _episodesSubject = new BehaviorSubject<Episode[]>([]);
+  constructor(private _apollo: Apollo) {}
 
-  get episodes() {
-    return this._episodesSubject.asObservable();
-  }
+  public getDataApi(query?: TypedDocumentNode) {
+    const QUERY = query
+      ? query
+      : gql`
+          query ($name: String) {
+            episodes(filter: { name: $name }) {
+              results {
+                id
+                name
+                episode
+                air_date
+                characters {
+                  name
+                }
+              }
+            }
+          }
+        `;
 
-  set episodesData(episodes: Episode[]) {
-    this._episodesSubject.next(episodes);
-  }
-
-  constructor(private _apollo: Apollo) {
-    this.getDataApi();
-  }
-
-  private getDataApi() {
-    this._apollo
-      .watchQuery<EpisodesResponse>({
+    return this._apollo
+      .watchQuery({
         query: QUERY,
+        variables: {
+          name,
+        },
       })
       .valueChanges.pipe(
-        tap(({ data }) => {
-          this.episodesData = data.episodes.results;
+        map(({ data }: any) => {
+          return data.episodes.results
         })
       )
-      .subscribe();
+
   }
 }

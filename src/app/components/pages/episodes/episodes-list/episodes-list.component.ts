@@ -13,15 +13,14 @@ export class EpisodesListComponent {
   selectedEpisodeName: string = '';
 
   constructor(private _episodesService: EpisodesService) {
-    this.episodes$ = this._episodesService.episodes;
+    this.episodes$ = this._episodesService.getDataApi()
   }
 
   openEpisodeDetails(name: string): void {
-
     this.displayEpisodeDetails = true;
     this.selectedEpisodeName = name;
   }
-  episodeDetailsClosed(display:boolean):void{
-    this.displayEpisodeDetails=false;
+  episodeDetailsClosed(display: boolean): void {
+    this.displayEpisodeDetails = false;
   }
 }

@@ -7,17 +7,13 @@ import {
   OnChanges,
   Output,
 } from '@angular/core';
-import { EpisodeDetails } from '@app/shared/models/data.interface';
-import { EpisodeDetailsService } from '@app/shared/services/episode-details.service';
+import { Episode } from '@app/shared/models/data.interface';
+import { EpisodesService } from '@app/shared/services/episodes.service';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-episodes-details',
   templateUrl: './episodes-details.component.html',
-  providers: [
-    EpisodeDetailsService,
-    { provide: 'nameToFilter', useValue: 'Pilot' },
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EpisodesDetailsComponent implements OnChanges {
@@ -28,13 +24,12 @@ export class EpisodesDetailsComponent implements OnChanges {
     new EventEmitter<boolean>();
 
   render: boolean = false;
-  episodeDetails$!: Observable<EpisodeDetails>;
+  episodeDetails$!: Observable<Episode[]>;
 
-  constructor(private _episodeDetailsService:EpisodeDetailsService) {}
+  constructor(private _episodesService:EpisodesService) {}
 
   ngOnChanges(): void {
-    this._episodeDetailsService.getEpisodeDetailsData(this.nameToFilter);
-    this.episodeDetails$ = this._episodeDetailsService.episodeDetails;
+    // this.episodeDetails$ = this._episodesService.episodes;
   }
 
   closeDialog(): void {
