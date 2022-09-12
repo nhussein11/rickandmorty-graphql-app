@@ -24,6 +24,6 @@
   <app-episodes-details
     [display]="displayEpisodeDetails"
     [nameToFilter]="selectedEpisodeName"
-    (closeEpisodeDetails)="episodeDetailsClosed($event)"
+    (closeEpisodeDetails)="displayEpisodeDetails = $event"
   ></app-episodes-details>
 </ng-template>

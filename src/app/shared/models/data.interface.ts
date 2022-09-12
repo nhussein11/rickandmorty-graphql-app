@@ -15,7 +15,7 @@ export interface Episode {
 }
 
 export interface EpisodeDetails extends Episode {
-  air_date:string;
+  air_date: string;
   characters: Character[];
 }
 

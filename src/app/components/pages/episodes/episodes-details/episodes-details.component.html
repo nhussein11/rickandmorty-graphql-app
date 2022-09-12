@@ -1,34 +1,36 @@
-<p-dialog
-  header="{{ (episodeDetails$ | async)!.name }}"
-  [(visible)]="display"
-  (onHide)="closeDialog()"
->
-  <article class="grid">
-    <div class="flex justify-content-center align-items-center col">
-      <ul class="text-3xl">
-        <li class="py-4">
-          <label><strong>Id: </strong></label>
-          {{ (episodeDetails$ | async)!.id }}
-        </li>
-        <li class="py-4">
-          <label><strong>Name: </strong></label>
-          {{ (episodeDetails$ | async)!.name }}
-        </li>
-        <li class="py-4">
-          <label><strong>Species:</strong> </label>
-          {{ (episodeDetails$ | async)!.episode }}
-        </li>
-        <li class="py-4">
-          <label><strong>Gender: </strong></label>
-          {{ (episodeDetails$ | async)!.air_date }}
-        </li>
-        <li class="py-4">
-          <label><strong>Characters: </strong></label>
-          <div
-            *ngFor="let character of (episodeDetails$ | async)!.characters"
-            > <span> > {{ character.name}}</span></div>
-        </li>
-      </ul>
-    </div>
-  </article>
-</p-dialog>
+<div *ngIf="episodeDetails$ | async as episodeDetails">
+  <p-dialog
+    [(visible)]="display"
+    (onHide)="closeDialog()"
+    header="{{ episodeDetails.name }}"
+  >
+    <article class="grid">
+      <div class="flex justify-content-center align-items-center col">
+        <ul class="text-3xl">
+          <li class="py-4">
+            <label><strong>Id: </strong></label>
+            {{ episodeDetails.id }}
+          </li>
+          <li class="py-4">
+            <label><strong>Name: </strong></label>
+            {{ episodeDetails.name }}
+          </li>
+          <li class="py-4">
+            <label><strong>Species:</strong> </label>
+            {{ episodeDetails.episode }}
+          </li>
+          <li class="py-4">
+            <label><strong>Gender: </strong></label>
+            {{ episodeDetails.air_date }}
+          </li>
+          <li class="py-4">
+            <label><strong>Characters: </strong></label>
+            <div *ngFor="let character of episodeDetails.characters">
+              <span> > {{ character.name }}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </article>
+  </p-dialog>
+</div>
