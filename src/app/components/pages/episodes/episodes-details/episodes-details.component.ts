@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Injector,
   Input,
   OnChanges,
   Output,
@@ -10,7 +9,7 @@ import {
 import { EpisodeDetails } from '@app/shared/models/data.interface';
 import { EpisodesService } from '@app/shared/services/episodes.service';
 import { gql } from 'apollo-angular';
-import { first, map, Observable, take } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 const QUERY = gql`
   query ($name: String) {

@@ -1,5 +1,9 @@
 <div *ngIf="episodeDetails$ | async as episodeDetails">
-  <p-dialog [(visible)]="display" (onHide)="closeDialog()">
+  <p-dialog
+    [(visible)]="display"
+    (onHide)="closeDialog()"
+    header="{{ episodeDetails.name }}"
+  >
     <article class="grid">
       <div class="flex justify-content-center align-items-center col">
         <ul class="text-3xl">
