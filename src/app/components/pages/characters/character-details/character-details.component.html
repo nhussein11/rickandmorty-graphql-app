@@ -1,18 +1,18 @@
 <p-dialog
-  header="{{ character.name }}"
+
   [(visible)]="display"
   (onHide)="closeDialog()"
 >
   <article class="grid">
-    <p-image
+    <!-- <p-image
       src="{{ character.image }}"
       alt="Image"
       width="250"
       class="col"
-    ></p-image>
+    ></p-image> -->
     <div class="flex justify-content-center align-items-center col">
       <ul class="text-3xl">
-        <li class="py-4">
+        <!-- <li class="py-4">
           <label><strong>Status: </strong></label> {{ character.status }}
         </li>
         <li class="py-4">
@@ -20,7 +20,7 @@
         </li>
         <li class="py-4">
           <label><strong>Gender: </strong></label> {{ character.gender }}
-        </li>
+        </li> -->
       </ul>
     </div>
   </article>

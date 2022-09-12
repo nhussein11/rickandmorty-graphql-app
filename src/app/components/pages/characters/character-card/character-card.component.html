@@ -24,9 +24,15 @@
     <p-button
       label="Details"
       icon="pi pi-info-circle"
-      (onClick)="openDialog()"
+      (onClick)="display = true"
     ></p-button>
   </ng-template>
 </p-card>
 
-<app-character-details (dialogClosed)="dialogClosed($event)" [character]="character" [display]="display"></app-character-details>
+<ng-container *ngIf="display">
+  <app-character-details
+    (dialogClosed)="display = $event"
+    [id]="character.id"
+    [display]="display"
+  ></app-character-details>
+</ng-container>
