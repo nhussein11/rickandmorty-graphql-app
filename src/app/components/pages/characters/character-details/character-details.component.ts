@@ -7,7 +7,6 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { Character } from '@app/shared/models/data.interface';
 import { CharactersService } from '@app/shared/services/characters.service';
 
 @Component({
@@ -17,7 +16,6 @@ import { CharactersService } from '@app/shared/services/characters.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharacterDetailsComponent implements OnChanges {
-  // @Input() character: Character = {} as Character;
   @Input() id!: number;
   @Input() display: boolean = false;
   @Output() dialogClosed = new EventEmitter<boolean>();
