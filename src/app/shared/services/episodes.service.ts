@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql, TypedDocumentNode } from 'apollo-angular';
-import { map, take } from 'rxjs';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,16 +15,11 @@ export class EpisodesService {
     const QUERY = query
       ? query
       : gql`
-          query ($name: String) {
-            episodes(filter: { name: $name }) {
+          {
+            episodes {
               results {
-                id
                 name
                 episode
-                air_date
-                characters {
-                  name
-                }
               }
             }
           }
@@ -39,7 +34,6 @@ export class EpisodesService {
       })
       .valueChanges.pipe(
         map(({ data }: any) => {
-          console.log(data.episodes.results);
           return data.episodes.results;
         })
       );
