@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql, TypedDocumentNode } from 'apollo-angular';
-import { map } from 'rxjs';
+import { map, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,10 @@ import { map } from 'rxjs';
 export class EpisodesService {
   constructor(private _apollo: Apollo) {}
 
-  public getDataApi(query?: TypedDocumentNode, filter?: object) {
+  public getDataApi(
+    query?: TypedDocumentNode<unknown, unknown>,
+    filter?: object
+  ) {
     const QUERY = query
       ? query
       : gql`
@@ -36,6 +39,7 @@ export class EpisodesService {
       })
       .valueChanges.pipe(
         map(({ data }: any) => {
+          console.log(data.episodes.results);
           return data.episodes.results;
         })
       );

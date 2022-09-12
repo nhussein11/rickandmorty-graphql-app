@@ -7,10 +7,26 @@ import {
   OnChanges,
   Output,
 } from '@angular/core';
-import { Episode } from '@app/shared/models/data.interface';
+import { EpisodeDetails } from '@app/shared/models/data.interface';
 import { EpisodesService } from '@app/shared/services/episodes.service';
-import { Observable } from 'rxjs';
+import { gql } from 'apollo-angular';
+import { first, map, Observable, take } from 'rxjs';
 
+const QUERY = gql`
+  query ($name: String) {
+    episodes(filter: { name: $name }) {
+      results {
+        id
+        name
+        episode
+        air_date
+        characters {
+          name
+        }
+      }
+    }
+  }
+`;
 @Component({
   selector: 'app-episodes-details',
   templateUrl: './episodes-details.component.html',
@@ -24,13 +40,19 @@ export class EpisodesDetailsComponent implements OnChanges {
     new EventEmitter<boolean>();
 
   render: boolean = false;
-  episodeDetails$!: Observable<Episode[]>;
+  episodeDetails$!: Observable<EpisodeDetails>;
 
-  constructor(private _episodesService:EpisodesService) {}
+  constructor(private _episodesService: EpisodesService) {}
 
   ngOnChanges(): void {
-    // this.episodeDetails$ = this._episodesService.episodes;
-    
+    const FILTER = {
+      name: this.nameToFilter,
+    };
+    this.episodeDetails$ = this._episodesService.getDataApi(QUERY, FILTER).pipe(
+      map((episode) => {
+        return episode[0];
+      })
+    );
   }
 
   closeDialog(): void {
