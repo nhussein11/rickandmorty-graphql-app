@@ -36,12 +36,6 @@ export class CharactersService {
         query: QUERY,
         variables: FILTER,
       })
-      .valueChanges.pipe(
-        map(({ data }: any) => {
-          console.log( data.characters.results)
-          
-          return data.characters.results;
-        })
-      );
+      .valueChanges.pipe(map(({ data }: any) => data.characters.results));
   }
 }
