@@ -13,21 +13,21 @@ import { gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
 
 const QUERY = gql`
-query Characters($name: String) {
-  characters(filter: {name: $name}) {
-    results {
-      name
-      status
-      species
-      gender
-      image
-      type
-      location {
+  query Characters($name: String) {
+    characters(filter: { name: $name }) {
+      results {
         name
+        status
+        species
+        gender
+        image
+        type
+        location {
+          name
+        }
       }
     }
   }
-}
 `;
 
 @Component({
@@ -47,11 +47,9 @@ export class CharacterDetailsComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     const FILTER = { name: this.nameToFilter };
-    this.characterDetails$ = this._charactersService.getDataApi(QUERY, FILTER).pipe(
-      map((character) => {
-        return character[0];
-      })
-    );    
+    this.characterDetails$ = this._charactersService
+      .getDataApi(QUERY, FILTER)
+      .pipe(map((characters) => characters[0]));
   }
 
   closeDialog(): void {

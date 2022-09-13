@@ -47,11 +47,9 @@ export class EpisodesDetailsComponent implements OnChanges {
     const FILTER = {
       name: this.nameToFilter,
     };
-    this.episodeDetails$ = this._episodesService.getDataApi(QUERY, FILTER).pipe(
-      map((episode) => {
-        return episode[0];
-      })
-    );
+    this.episodeDetails$ = this._episodesService
+      .getDataApi(QUERY, FILTER)
+      .pipe(map((episodes) => episodes[0]));
   }
 
   closeDialog(): void {
