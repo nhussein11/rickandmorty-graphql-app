@@ -32,7 +32,7 @@
 <ng-container *ngIf="display">
   <app-character-details
     (dialogClosed)="display = $event"
-    [id]="character.id"
+    [nameToFilter]="character.name"
     [display]="display"
   ></app-character-details>
 </ng-container>

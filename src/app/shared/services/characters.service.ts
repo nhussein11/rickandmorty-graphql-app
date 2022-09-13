@@ -38,6 +38,8 @@ export class CharactersService {
       })
       .valueChanges.pipe(
         map(({ data }: any) => {
+          console.log( data.characters.results)
+          
           return data.characters.results;
         })
       );

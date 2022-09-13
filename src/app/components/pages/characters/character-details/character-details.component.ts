@@ -7,7 +7,28 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { CharacterDetails } from '@app/shared/models/data.interface';
 import { CharactersService } from '@app/shared/services/characters.service';
+import { gql } from 'apollo-angular';
+import { map, Observable } from 'rxjs';
+
+const QUERY = gql`
+query Characters($name: String) {
+  characters(filter: {name: $name}) {
+    results {
+      name
+      status
+      species
+      gender
+      image
+      type
+      location {
+        name
+      }
+    }
+  }
+}
+`;
 
 @Component({
   selector: 'app-character-details',
@@ -16,15 +37,21 @@ import { CharactersService } from '@app/shared/services/characters.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharacterDetailsComponent implements OnChanges {
-  @Input() id!: number;
+  @Input() nameToFilter!: string;
   @Input() display: boolean = false;
   @Output() dialogClosed = new EventEmitter<boolean>();
 
-  constructor(private _charactersSerivce: CharactersService) {}
+  characterDetails$!: Observable<CharacterDetails>;
+
+  constructor(private _charactersService: CharactersService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.id)
-    
+    const FILTER = { name: this.nameToFilter };
+    this.characterDetails$ = this._charactersService.getDataApi(QUERY, FILTER).pipe(
+      map((character) => {
+        return character[0];
+      })
+    );    
   }
 
   closeDialog(): void {
