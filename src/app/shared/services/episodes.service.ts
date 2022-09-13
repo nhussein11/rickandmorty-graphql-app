@@ -32,10 +32,6 @@ export class EpisodesService {
         query: QUERY,
         variables: FILTER,
       })
-      .valueChanges.pipe(
-        map(({ data }: any) => {
-          return data.episodes.results;
-        })
-      );
+      .valueChanges.pipe(map(({ data }: any) => data.episodes.results));
   }
 }

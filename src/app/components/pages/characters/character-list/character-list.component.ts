@@ -6,12 +6,14 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-character-list',
   templateUrl: './character-list.component.html',
-  styleUrls: ['./character-list.component.css']
+  styleUrls: ['./character-list.component.css'],
 })
-export class CharacterListComponent {
-  characters$: Observable<Character[]>;
-  constructor(private _charactersSerivce:CharactersService) {
-    this.characters$ = this._charactersSerivce.characters;
-   }
-
+export class CharacterListComponent implements OnInit {
+  characters$!: Observable<Character[]>;
+  
+  constructor(private _charactersSerivce: CharactersService) {}
+  
+  ngOnInit(): void {
+    this.characters$ = this._charactersSerivce.getDataApi();
+  }
 }

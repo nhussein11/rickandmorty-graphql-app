@@ -1,50 +1,41 @@
 import { Injectable } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
-import { BehaviorSubject, tap } from 'rxjs';
-import { Character, CharactersResponse } from '../models/data.interface';
-
-const QUERY = gql`
-  {
-    characters {
-      results {
-        id
-        name
-        status
-        species
-        gender
-        image
-      }
-    }
-  }
-`;
+import { Apollo, gql, TypedDocumentNode } from 'apollo-angular';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CharactersService {
-  private _charactersSubject = new BehaviorSubject<Character[]>([]);
-  
-  get characters() {
-    return this._charactersSubject.asObservable();
-  }
-  set charactersData(character: Character[]) {
-    this._charactersSubject.next(character);
-  }
+  constructor(private _apollo: Apollo) {}
 
-  constructor(private _apollo: Apollo) {
-    this.getDataApi();
-  }
+  public getDataApi(
+    query?: TypedDocumentNode<unknown, unknown>,
+    filter?: object
+  ) {
+    const QUERY = query
+      ? query
+      : gql`
+          {
+            characters {
+              results {
+                id
+                name
+                status
+                species
+                gender
+                image
+              }
+            }
+          }
+        `;
 
-  private getDataApi(): void {
-    this._apollo
-      .watchQuery<CharactersResponse>({
+    const FILTER = filter ? filter : {};
+
+    return this._apollo
+      .watchQuery({
         query: QUERY,
+        variables: FILTER,
       })
-      .valueChanges.pipe(
-        tap(( {data} ) => {
-          this.charactersData = data.characters.results;
-        })
-      )
-      .subscribe();
+      .valueChanges.pipe(map(({ data }: any) => data.characters.results));
   }
 }

@@ -20,11 +20,19 @@ export interface EpisodeDetails extends Episode {
 }
 
 export interface Character {
-  id: number;
+  id: string;
   name: string;
   status: string;
   species: string;
   gender: string;
   image: string;
-  isFavorite?: boolean;
+}
+
+export interface CharacterDetails extends Character {
+  type: string;
+  location: Location;
+}
+
+export interface Location {
+  name: string;
 }
