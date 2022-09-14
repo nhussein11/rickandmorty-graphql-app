@@ -1,7 +1,7 @@
 <p-card
   header="{{ character.name }}"
-  [style]="{ width: '300px', margin: '0.7rem', padding: '1rem' }"
-  styleClass="card-container inline-block "
+  [style]="{ width: '300px',margin: '1rem', padding: '1rem' }"
+  styleClass="card-container inline-block h-30rem"
 >
   <ng-template pTemplate="header">
     <figure>
@@ -13,13 +13,7 @@
       />
     </figure>
   </ng-template>
-  <div>
-    <ul>
-      <li><label>Status: </label> {{ character.status }}</li>
-      <li><label>Species: </label> {{ character.species }}</li>
-      <li><label>Gender: </label> {{ character.gender }}</li>
-    </ul>
-  </div>
+
   <ng-template pTemplate="footer">
     <p-button
       label="Details"
